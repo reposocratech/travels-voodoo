@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Col, Row, Form, Button } from 'react-bootstrap'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const initialValue = {
     name: "",
@@ -49,7 +49,7 @@ export const Register = () => {
     <Row className='d-flex justify-content-center p-5'>
     <Col md={4}>
     <Form>
-        <h2>registro</h2>
+        <h2>Registro</h2>
     <Form.Group className="mb-3" controlId="formBasicName">
       <Form.Label>Nombre</Form.Label>
       <Form.Control 
@@ -84,11 +84,19 @@ export const Register = () => {
 
    
     <Button 
-        variant="primary" 
+        variant="primary me-2" 
         onClick={handleSubmit}
     >
       Submit
     </Button>
+   
+    <Button 
+        variant="primary" 
+        onClick={()=>navigate("/")}
+    >
+      Cancelar
+    </Button>
+    <p>Ya estás registrado? <Link to="/login">Loguéate</Link></p>
   </Form>
     </Col>
     </Row>

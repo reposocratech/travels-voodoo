@@ -7,14 +7,15 @@ import { Home } from './pages/dashboard/home/Home';
 import { AppRoutes } from './Routes/AppRoutes';
 import { Container } from 'react-bootstrap';
 import { Register } from './pages/auth/Register/Register';
+import { TravelsProvider } from './context/TravelsContext';
 
 function App() {
-
   return (
     <Container fluid>
-      <AppRoutes />
+      <TravelsProvider>
+        <AppRoutes />
+      </TravelsProvider>
     </Container>
-
   )
 }
 

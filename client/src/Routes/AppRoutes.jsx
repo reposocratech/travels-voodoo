@@ -6,6 +6,9 @@ import NavBarApp from '../components/NavBarApp/NavBarApp';
 import {Row, Col} from 'react-bootstrap'
 import { Register } from '../pages/auth/Register/Register';
 import { Login } from '../pages/auth/Login/Login';
+import { About } from '../pages/dashboard/About/About';
+import { AdminHome } from '../pages/admin/AdminHome/AdminHome';
+import { AllUsers } from '../pages/user/allusers/AllUsers';
 
 export const AppRoutes = () => {
   return (
@@ -16,6 +19,9 @@ export const AppRoutes = () => {
                 <Route path='/' element={<Home />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/login' element={<Login />} />
+                <Route path='/about' element={<About />} />
+                <Route path='/admin' element={<AdminHome />} />
+                <Route path='/allusers' element={<AllUsers />} />
                 <Route path='*' element={<ErrorPage/>} />
             </Routes>
         </Row>
