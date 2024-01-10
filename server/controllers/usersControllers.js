@@ -88,16 +88,40 @@ class usersControllers {
         const user_id = req.params.id;
         console.log("hola usuario ", user_id);
         let sql = `SELECT * FROM user WHERE user_id = ${user_id} AND is_deleted = 0`
-
+        
         connection.query(sql, (err, result) => {
             if (err){
                 res.status(400).json({err})
             }
-
+            
             console.log(result[0]);
             res.status(200).json(result[0]);
         })
     }
+    
+    //--------------------------------
+    //4.- edita usuario
+    editUser = (req, res) =>{
+        // console.log(req.file);
+        const {name, lastname, address, user_city, user_id} =  JSON.parse(req.body.editUser)
+        //aqui deberiasmos de hacer validación de los datos a insertar
+       let sql = `UPDATE user SET name = "${name}", lastname = "${lastname}", address = "${address}", user_city = "${user_city}" WHERE user_id = ${user_id} `
+    
+       let img
+    
+       if(req.file){
+        img = req.file.filename;
+        sql = `UPDATE user SET name = "${name}", lastname = "${lastname}", address = "${address}", user_city = "${user_city}", user_img = "${img}" WHERE user_id = ${user_id} `
+       }
 
+       connection.query(sql, (err, result)=>{
+        if(err){
+            res.status(400).json(err)
+        }else{
+            res.status(200).json({result, img})
+        }
+       })
+    }
 }
+
 module.exports = new usersControllers;

@@ -8,7 +8,9 @@ import { Register } from '../pages/auth/Register/Register';
 import { Login } from '../pages/auth/Login/Login';
 import { About } from '../pages/dashboard/About/About';
 import { AdminHome } from '../pages/admin/AdminHome/AdminHome';
-import { AllUsers } from '../pages/user/allusers/AllUsers';
+import { AllUsers } from '../pages/users/allusers/AllUsers';
+import { User } from '../pages/users/users/user/User';
+import { EditUser } from '../pages/users/users/editUser/EditUser';
 
 export const AppRoutes = () => {
   return (
@@ -22,6 +24,8 @@ export const AppRoutes = () => {
                 <Route path='/about' element={<About />} />
                 <Route path='/admin' element={<AdminHome />} />
                 <Route path='/allusers' element={<AllUsers />} />
+                <Route path='/user' element={<User />} />
+                <Route path='/edituser' element={<EditUser />} />
                 <Route path='*' element={<ErrorPage/>} />
             </Routes>
         </Row>

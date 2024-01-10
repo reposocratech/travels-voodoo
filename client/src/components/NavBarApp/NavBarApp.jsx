@@ -7,6 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import {Link, useNavigate} from 'react-router-dom'
 import { TravelsContext } from '../../context/TravelsContext';
 import { delLocalStorage } from '../../helpers/localStorageUtils';
+import './navbarApp.scss'
 
 function NavBarApp() {
   const { user, token, setUser, setToken } = useContext(TravelsContext);
@@ -22,11 +23,14 @@ function NavBarApp() {
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
-      <Container>
+      <Container fluid>
         <Navbar.Brand as={Link} to="/">Travels</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+        <Navbar.Collapse id="basic-navbar-nav w-100">
+          <Nav className="me-auto d-flex w-100 ">
+            <div className='d-flex justify-content-between w-100'>
+
+            <div className='d-flex'>
 
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             
@@ -39,29 +43,40 @@ function NavBarApp() {
             {user?.type === 2 &&   
               <Nav.Link as={Link} to="/admin">Admin General</Nav.Link>
             }
+            </div>
 
+            <div className='d-flex'>
 
             {!user? 
               <>
                 <Button 
                   variant='outline-success me-2'
                   onClick={()=>navigate("/register")}
-                >Register</Button>
+                  >Register</Button>
                 <Button 
                   variant='outline-success me-2'
                   onClick={()=>navigate("/login")}
-                >Login</Button>
+                  >Login</Button>
               </>:
               <>
-              <div className='d-flex'>
-                <p>{user.name} {user.lastname}</p>
+              <div className='d-flex user' onClick={()=>navigate('/user')}>
+                <p className='mt-3 me-3'>{user.name} {user.lastname}</p>
+                <div className='avatar'>
+                  {user.user_img?
+                    <img src={`http://localhost:3000/images/users/${user.user_img}`}/>
+                    :
+                    <p>{user.name.charAt(0).toUpperCase()}</p>
+                  }
+                </div>
               </div>
               <Button 
                 variant='outline-success me-2 ms-2'
                 onClick={logOut}
-              >LogOut</Button>
+                >LogOut</Button>
               </>
               }
+              </div>
+              </div>
           </Nav>
         </Navbar.Collapse>
       </Container>
