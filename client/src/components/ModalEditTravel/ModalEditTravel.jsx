@@ -1,18 +1,38 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import { TravelsContext } from "../../context/TravelsContext";
 
 export const ModalEditTravel = ({ showModal, setShowModal, travelToEdit, setTravelToEdit }) => {
+  const { travels, setTravels} = useContext(TravelsContext)
+
   const handleClose = () => {
     setShowModal(false);
   };
 
   console.log(travelToEdit);
+  console.log("treavels", travels);
 
   const handleChange = (e) => {
     const {name, value} =e.target
     setTravelToEdit({...travelToEdit, [name]:value})
   }
   
+  const handleSubmit = () => {
+
+    const newTravels = travels.map((elem)=>(
+      elem.travel_id === travelToEdit.travel_id? travelToEdit: elem      
+    ))
+    
+    axios
+      .put("http://localhost:3000/travels/edittravel", travelToEdit)
+      .then((res)=>{
+        setShowModal(false)
+        setTravels(newTravels)
+      })
+      .catch((err)=>{})
+  }
+
   return (
     <Modal show={showModal} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -52,9 +72,9 @@ export const ModalEditTravel = ({ showModal, setShowModal, travelToEdit, setTrav
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
-          Close
+          Cancelar
         </Button>
-        <Button variant="primary" onClick={handleClose}>
+        <Button variant="primary" onClick={handleSubmit}>
           Save Changes
         </Button>
       </Modal.Footer>

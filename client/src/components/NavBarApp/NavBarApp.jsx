@@ -11,7 +11,6 @@ import './navbarApp.scss'
 
 function NavBarApp() {
   const { user, token, setUser, setToken, setIsLogged } = useContext(TravelsContext);
-  console.log("contex", token, user);
   const navigate = useNavigate();
 
   const logOut = () => {

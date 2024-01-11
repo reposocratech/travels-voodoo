@@ -19,11 +19,9 @@ export const TravelsProvider = ({ children }) => {
       if(tokenLocalStorage){
         const { id, type } = jwtDecode(tokenLocalStorage).user;
         
-        console.log("el token", id, type);
         axios
           .get(`http://localhost:3000/users/oneuser/${id}`)
           .then((res)=>{
-            console.log(res)
             setUser(res.data.result)
             setTravels(res.data.resultTravel)
             setIsLogged(true)
@@ -32,7 +30,6 @@ export const TravelsProvider = ({ children }) => {
       }
     }, [isLogged])
     
-console.log("isLooogggeeedd", isLogged);
   return (
     <TravelsContext.Provider value={{
         user, 

@@ -33,7 +33,8 @@ CREATE TABLE picture (
     travel_id INT unsigned NOT NULL,
     CONSTRAINT fk_travel_id FOREIGN KEY (travel_id) REFERENCES travel(travel_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
+select * from travel;
+select * from picture;
 drop database travelsApp;
 -- drop table picture;
 -- select * from users;

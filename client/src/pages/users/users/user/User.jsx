@@ -9,7 +9,6 @@ export const User = () => {
   const [showCreateTravel, setShowCreateTravel] = useState(false);
   const {user} = useContext(TravelsContext);
   const navigate = useNavigate();
-console.log("estoy en el comp user", user);
   return (
     <>
     <Col>

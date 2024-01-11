@@ -5,8 +5,17 @@ require('dotenv').config()
 
 class usersControllers {
     getAllUsers = (req, res) =>{
-        res.status(200).json({saludo: "hola"})
+       let sql = "select user.*, travel.*, picture.* from user, travel, picture where user.user_id = travel.user_id and travel.travel_id = picture.travel_id and user.type = 1 and user.is_deleted = 0 and travel.is_deleted = 0 group by travel.travel_id order by rand()"
+    
+        connection.query(sql, (err, result)=>{
+            if(err){
+                res.status(500).json(err)
+            }
+            console.log(result);
+            res.status(200).json(result)
+        })
     }
+
 
     //-------------------------------------------------
     //1.- crear un usuario
