@@ -8,7 +8,9 @@ export const TravelsContext = createContext()
 
 export const TravelsProvider = ({ children }) => {
     const [user, setUser] = useState();
+    const [travels, setTravels] = useState();
     const [token, setToken] = useState();
+    const [isLogged, setIsLogged] = useState(false);
 
     useEffect(() => {
       const tokenLocalStorage = getLocalStorage("token")
@@ -21,19 +23,26 @@ export const TravelsProvider = ({ children }) => {
         axios
           .get(`http://localhost:3000/users/oneuser/${id}`)
           .then((res)=>{
-            setUser(res.data)
+            console.log(res)
+            setUser(res.data.result)
+            setTravels(res.data.resultTravel)
+            setIsLogged(true)
           })
           .catch((err)=>{console.log(err)})            
       }
-    }, [])
+    }, [isLogged])
     
-
+console.log("isLooogggeeedd", isLogged);
   return (
     <TravelsContext.Provider value={{
         user, 
         setUser, 
         token, 
-        setToken
+        setToken,
+        isLogged,
+        setIsLogged,
+        travels,
+        setTravels
     }}>
         {children}
     </TravelsContext.Provider>

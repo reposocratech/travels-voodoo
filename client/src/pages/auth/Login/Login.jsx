@@ -14,7 +14,7 @@ export const Login = () => {
   const [login, setLogin] = useState(initialValue)
   const [msgError, setMsgError] = useState("")
 
-  const {setUser, setToken} = useContext(TravelsContext)
+  const {setUser, setToken, setIsLogged} = useContext(TravelsContext)
 
   const navigate = useNavigate()
 
@@ -27,7 +27,8 @@ export const Login = () => {
       axios
         .post("http://localhost:3000/users/login", login)
         .then((res)=>{
-          setUser(res.data.user)
+          // setUser(res.data.user)
+          setIsLogged(true)
           setToken(res.data.token)
           saveLocalStorage("token", res.data.token)
 

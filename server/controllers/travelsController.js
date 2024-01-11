@@ -17,7 +17,7 @@ class TravelsControllers {
             if(err){
                 res.status(500).json(err)
             }
-
+            console.log(result);
             //inserción las fotos
             let travel_id = result.insertId
             this.saveTravelImages(images, travel_id)
@@ -41,6 +41,19 @@ class TravelsControllers {
                 }
             })          
         });
+    }
+
+    //pide ls fotos de un viaje
+    getPicsOneTravel = (req, res) =>{
+        const {travel_id} = req.params;
+        let sql = `SELECT * FROM picture WHERE travel_id = ${travel_id} AND is_deleted = 0`;
+
+        connection.query(sql, (err, result) => {
+            err? 
+                res.status(500).json(err)
+                :
+                res.status(200).json(result)
+        })
     }
 }
 

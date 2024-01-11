@@ -1,0 +1,17 @@
+.travel{
+    border: 1px solid black;
+    margin: 20px;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+}
+.contPictures{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 30px;
+    img{
+        width: 200px;
+        height: 200px;
+    }   
+}

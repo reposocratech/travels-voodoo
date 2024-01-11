@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {Row, Col, Button, Form} from 'react-bootstrap'
 import axios from 'axios'
+import { TravelsContext } from '../../context/TravelsContext'
 
 const initialValue = {
     travel_city:"",
@@ -12,6 +13,7 @@ export const CreateTravel = ({setShowCreateTravel, user_id}) => {
     const [registerTravel, setRegisterTravel] = useState(initialValue);
     const [files, setFiles] = useState();
     const [msgError, setMsgError] = useState("");
+    const {setTravels} = useContext(TravelsContext)
     
     const handleChange = (e) =>{
         const {name, value} = e.target;
@@ -40,7 +42,10 @@ export const CreateTravel = ({setShowCreateTravel, user_id}) => {
 
             axios
                 .post('http://localhost:3000/travels/createtravel', newFormData)
-                .then((res)=>console.log(res))
+                .then((res)=>{
+                  setTravels(res.data)
+                  setShowCreateTravel(false)
+                })
                 .catch((err)=>console.log(err))
 
         }

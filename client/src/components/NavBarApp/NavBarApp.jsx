@@ -10,7 +10,7 @@ import { delLocalStorage } from '../../helpers/localStorageUtils';
 import './navbarApp.scss'
 
 function NavBarApp() {
-  const { user, token, setUser, setToken } = useContext(TravelsContext);
+  const { user, token, setUser, setToken, setIsLogged } = useContext(TravelsContext);
   console.log("contex", token, user);
   const navigate = useNavigate();
 
@@ -18,6 +18,7 @@ function NavBarApp() {
     delLocalStorage("token");
     setUser();
     setToken();
+    setIsLogged(false)
     navigate("/");
   }
 

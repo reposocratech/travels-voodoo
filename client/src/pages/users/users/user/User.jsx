@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { TravelsContext  } from '../../../../context/TravelsContext'
-import { Button, Col } from 'react-bootstrap'
+import { Button, Col, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { CreateTravel } from '../../../../components/CreateTravel/CreateTravel'
+import { TravelGallery } from '../../../../components/TravelGallery/TravelGallery'
 
 export const User = () => {
   const [showCreateTravel, setShowCreateTravel] = useState(false);
@@ -34,8 +35,13 @@ console.log("estoy en el comp user", user);
     {showCreateTravel && <CreateTravel 
                             setShowCreateTravel={setShowCreateTravel}
                             user_id={user.user_id}
-                         />}
+    />}
     </Col>
+    <Row>
+      <Col>
+        <TravelGallery />
+      </Col>
+    </Row>
   </>
   )
 }
