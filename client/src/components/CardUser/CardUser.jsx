@@ -7,6 +7,7 @@ export const CardUser = ({elem}) => {
       <Card.Img variant="top" src={`http://localhost:3000/images/travels/${elem.picture_img}`}/>
       <Card.Body>
         <Card.Title>{elem.travel_city}</Card.Title>
+        <Card.Text>pais: {elem.country}</Card.Text>
         <Card.Text>
          {elem.description}
         </Card.Text>

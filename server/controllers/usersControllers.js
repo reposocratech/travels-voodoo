@@ -56,8 +56,10 @@ class usersControllers {
             if(error) return res.status(500).json(error)
             console.log(result);
      //en caso de no encontrar el usuario (no existe en la bd)
-            if(!result || result.length == 0 || result[0].is_deleted == 1){
+            if(!result || result.length == 0){
                 res.status(401).json("Email no existe")
+            }else if(result[0].is_deleted == 1){
+                res.status(401).json("está bloqueado!!!!!")
             }else{
             //en el caso de que exista un usuario con ese email y además no esté borrado de manera lógica
                 const user = result[0];

@@ -11,15 +11,17 @@ export const TravelsProvider = ({ children }) => {
     const [travels, setTravels] = useState();
     const [token, setToken] = useState();
     const [isLogged, setIsLogged] = useState(false);
+    const [adminUsers, setAdminUsers] =  useState()
 
     useEffect(() => {
       const tokenLocalStorage = getLocalStorage("token")
       setToken(tokenLocalStorage)
 
       if(tokenLocalStorage){
+       
         const { id, type } = jwtDecode(tokenLocalStorage).user;
-        
-        axios
+
+          axios
           .get(`http://localhost:3000/users/oneuser/${id}`)
           .then((res)=>{
             setUser(res.data.result)
@@ -27,6 +29,13 @@ export const TravelsProvider = ({ children }) => {
             setIsLogged(true)
           })
           .catch((err)=>{console.log(err)})            
+
+          if(type === 2){
+            axios
+              .get('http://localhost:3000/admin/getAllUsers')
+              .then((res)=>setAdminUsers(res.data))
+              .catch((err)=>console.log(err))
+          }
       }
     }, [isLogged])
     
@@ -39,7 +48,9 @@ export const TravelsProvider = ({ children }) => {
         isLogged,
         setIsLogged,
         travels,
-        setTravels
+        setTravels,
+        adminUsers,
+        setAdminUsers     
     }}>
         {children}
     </TravelsContext.Provider>
